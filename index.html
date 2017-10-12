@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        p.demo {
+            height: 300px;
+            background-color: gray;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <h1>{{message}}</h1>
+        <p>
+            下面的灰色區塊隱藏時，點 number += 1 vue-devtools 不會更新 number，
+            這是因為此時 number 這個 data 沒有被使用（因為從 dom 上面拿掉了），
+            此時可以：
+            <ul>
+                <li>按 dev tools 的重新整理按鈕強制更新</li>
+                <li>或者把灰色區域顯示，這樣就 number 就有被「使用」，dev tools 就可以更新</li>
+            </ul>
+            參考：
+            <a href="https://github.com/vuejs/vue-devtools/issues/323">https://github.com/vuejs/vue-devtools/issues/323</a>
+        </p>
+        <button @click="onClick">toggle v-if</button>
+        <button @click="onClick2">number += 1</button>
+        <p v-if="toggle" class="demo">You Clicked {{number}} times</p>
+    </div>
+    <script src="https://unpkg.com/vue@2.2.6/dist/vue.js"></script>
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                message: 'Hello Vue!',
+                toggle: true,
+                number: 0
+            },
+            methods: {
+                onClick() {
+                    this.toggle = !this.toggle
+                },
+                onClick2() {
+                    this.number += 1
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>
