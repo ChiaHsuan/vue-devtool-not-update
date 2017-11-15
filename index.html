@@ -31,8 +31,17 @@
         <button @click="onClick2">number += 1</button>
         <p v-if="toggle" class="demo">You Clicked {{number}} times</p>
     </div>
+
+    <div id="app2">
+        <h2>
+            用Vue換語言
+        </h2>
+        <button v-on:click="changeMessage" data-lan="lan">{{currentLan}}</button>
+        <p>{{message}}</p>
+    </div>
     <script src="https://unpkg.com/vue@2.2.6/dist/vue.js"></script>
     <script>
+
         var app = new Vue({
             el: '#app',
             data: {
@@ -49,6 +58,31 @@
                 }
             }
         });
+
+
+        var app2 = new Vue({
+            el: '#app2',
+            data: {
+                message: "Hello Vue!",
+                lan: "eng",
+                currentLan: "Click me to change the language to Chinese"
+            },
+            methods: {
+                changeMessage: function(){
+                    if(this.lan=="eng"){
+                        this.message = "哈囉vue";
+                        this.lan="ch";
+                        this.currentLan = "點我切英文";
+                    }else if(this.lan=="ch"){
+                        this.message = "Hello Vue!";
+                        this.lan = "eng";
+                        this.currentLan = "Click me to change the language to Chinese";
+                    }
+                }
+            }
+        });
+
+        
     </script>
 </body>
 
